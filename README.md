@@ -1,6 +1,6 @@
 # Bekymringsmelding Produsent Klient
 [![MIT Licens](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ks-no/fiks-bekymringsmelding-produsent-klient/blob/master/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/no.ks.fiks/bekymringsmelding-produsent-klient.svg)](https://search.maven.org/search?q=g:no.ks.fiks%20a:bekymringsmelding-produsent-klient)
+[![Maven Central](https://img.shields.io/maven-central/v/no.ks.fiks/fiks-bekymringsmelding-produsent-klient.svg)](https://search.maven.org/search?q=g:no.ks.fiks%20a:fiks-bekymringsmelding-produsent-klient)
 [![GitHub Release Date](https://img.shields.io/github/release-date/ks-no/fiks-bekymringsmelding-produsent-klient.svg)](https://github.com/ks-no/fiks-bekymringsmelding-produsent-klient/releases)
 [![GitHub last commit](https://img.shields.io/github/last-commit/ks-no/fiks-bekymringsmelding-produsent-klient.svg)](https://github.com/ks-no/fiks-bekymringsmelding-produsent-klient/commits/master)
 
