@@ -30,7 +30,7 @@
     </scm>
 
     <properties>
-        <jersey.version>2.31</jersey.version>
+        <jersey.version>2.40</jersey.version>
         <maskinporten-client.version>2.0.5</maskinporten-client.version>
         <jackson-datatype-jsr310.version>2.13.3</jackson-datatype-jsr310.version>
         <lombok.version>1.18.24</lombok.version>
