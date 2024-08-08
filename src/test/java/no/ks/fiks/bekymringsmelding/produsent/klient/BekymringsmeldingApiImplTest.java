@@ -1,5 +1,8 @@
 package no.ks.fiks.bekymringsmelding.produsent.klient;
 
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.MediaType;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.BekymringsmeldingId;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.Bydel;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.Historikk;
@@ -13,9 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,7 +50,7 @@ public class BekymringsmeldingApiImplTest {
     }
 
     @Test
-    public void bydeler() throws IOException {
+    public void bydeler(){
         when(clientMock.target(anyString())
                 .path(any())
                 .path(any())
@@ -70,7 +70,7 @@ public class BekymringsmeldingApiImplTest {
     }
 
     @Test
-    public void krypteringsnokler() throws IOException {
+    public void krypteringsnokler() {
         when(clientMock.target(anyString())
                 .path(any())
                 .path(any())

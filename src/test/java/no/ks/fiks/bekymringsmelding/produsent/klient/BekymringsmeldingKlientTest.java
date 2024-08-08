@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -52,7 +51,7 @@ public class BekymringsmeldingKlientTest {
     }
 
     @Test
-    public void krypterBekymringsmelding_medBydel_skalReturnereBekymringsmeldingsid() throws IOException {
+    public void krypterBekymringsmelding_medBydel_skalReturnereBekymringsmeldingsid() {
         when(apiMock.getKrypteringsnokler(anyString(), anyString())).thenAnswer((Answer<Krypteringsnokler>) invocation -> krypteringsnoklerMock);
         when(apiMock.sendBekymringsmelding(anyString(), anyString(), any(), any())).thenAnswer((Answer<UUID>) invocation -> UUID.randomUUID());
         when(krypteringsnoklerMock.getPrintOffentligNokkel()).thenAnswer((Answer<Nokkel>) invocation -> nokkelMock);
@@ -64,7 +63,7 @@ public class BekymringsmeldingKlientTest {
     }
 
     @Test
-    public void krypterBekymringsmelding_utenBydelSkalBrukeStandardMottaker_skalReturnereBekymringsmeldingsid() throws IOException {
+    public void krypterBekymringsmelding_utenBydelSkalBrukeStandardMottaker_skalReturnereBekymringsmeldingsid() {
         when(apiMock.getKrypteringsnokler(anyString(), anyString())).thenAnswer((Answer<Krypteringsnokler>) invocation -> krypteringsnoklerMock);
         when(apiMock.sendBekymringsmelding(anyString(), anyString(), any(), any())).thenAnswer((Answer<UUID>) invocation -> UUID.randomUUID());
         when(krypteringsnoklerMock.getPrintOffentligNokkel()).thenAnswer((Answer<Nokkel>) invocation -> nokkelMock);
@@ -79,7 +78,7 @@ public class BekymringsmeldingKlientTest {
     }
 
     @Test
-    public void krypterBekymringsmeldingManglerStandardMottaker_utenBydelSkalBrukeStandardMottaker_skalFeile() throws IOException {
+    public void krypterBekymringsmeldingManglerStandardMottaker_utenBydelSkalBrukeStandardMottaker_skalFeile() {
         assertThrows(RuntimeException.class, () -> klient.krypterOgSendBekymringsmelding("kommunenummer", pdf, json));
     }
 }
