@@ -1,5 +1,9 @@
 package no.ks.fiks.bekymringsmelding.produsent.klient;
 
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.MediaType;
 import lombok.NonNull;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.BekymringsmeldingId;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.Bydel;
@@ -10,10 +14,6 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPart;
 import org.glassfish.jersey.media.multipart.file.StreamDataBodyPart;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
