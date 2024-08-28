@@ -40,7 +40,7 @@
         <lombok.version>1.18.34</lombok.version>
         <fiks-io-asice-handler.version>2.2.0</fiks-io-asice-handler.version>
         <junit.version>5.10.3</junit.version>
-        <mockito.version>5.12.0</mockito.version>
+        <mockito.version>5.13.0</mockito.version>
     </properties>
 
     <inceptionYear>2021</inceptionYear>
