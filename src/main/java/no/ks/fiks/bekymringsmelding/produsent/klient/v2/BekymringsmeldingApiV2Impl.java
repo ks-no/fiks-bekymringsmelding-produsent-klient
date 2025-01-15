@@ -1,4 +1,4 @@
-package no.ks.fiks.bekymringsmelding.produsent.klient;
+package no.ks.fiks.bekymringsmelding.produsent.klient.v2;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.Entity;
@@ -18,7 +18,12 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
-public class BekymringsmeldingApiImpl implements BekymringsmeldingApi {
+public class BekymringsmeldingApiV2Impl implements BekymringsmeldingApiV2 {
+    public static final String INTEGRASJON_ID = "IntegrasjonId";
+    public static final String INTEGRASJON_PASSORD = "IntegrasjonPassord";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String BEARER_S = "Bearer %s";
+    public static final String KS_FIKS = "ks:fiks";
     private final Client client;
     private final String baseUrl;
     private final Maskinportenklient maskinporten;
@@ -26,7 +31,7 @@ public class BekymringsmeldingApiImpl implements BekymringsmeldingApi {
     private final String integrasjonId;
     private final String integrasjonPassord;
 
-    public BekymringsmeldingApiImpl(Client client, String baseUrl, Maskinportenklient maskinporten, UUID fiksOrgId, String integrasjonId, String integrasjonPassord) {
+    public BekymringsmeldingApiV2Impl(Client client, String baseUrl, Maskinportenklient maskinporten, UUID fiksOrgId, String integrasjonId, String integrasjonPassord) {
         this.client = client;
         this.baseUrl = baseUrl;
         this.maskinporten = maskinporten;
@@ -36,15 +41,15 @@ public class BekymringsmeldingApiImpl implements BekymringsmeldingApi {
     }
 
     @Override
-    public List<Bydel> getBydeler(@NonNull String kommunenummer) {
+    public List<Bydel> getBydeler(@NonNull String sprakKode) {
         return client.target(baseUrl)
-                .path("api/v1/kommuner")
-                .path(kommunenummer)
+                .path("api/v2/kommuner")
+                .path(sprakKode)
                 .path("bydeler")
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .header("IntegrasjonId", integrasjonId)
-                .header("IntegrasjonPassord", integrasjonPassord)
-                .header("Authorization", String.format("Bearer %s", maskinporten.getAccessToken("ks:fiks")))
+                .header(INTEGRASJON_ID, integrasjonId)
+                .header(INTEGRASJON_PASSORD, integrasjonPassord)
+                .header(AUTHORIZATION, String.format(BEARER_S, maskinporten.getAccessToken(KS_FIKS)))
                 .get()
                 .readEntity(new GenericType<List<Bydel>>() {});
     }
@@ -52,14 +57,14 @@ public class BekymringsmeldingApiImpl implements BekymringsmeldingApi {
     @Override
     public Krypteringsnokler getKrypteringsnokler(@NonNull String kommunenummer, @NonNull String bydelsnummer) {
         return client.target(baseUrl)
-                .path("api/v1/mottak/fagsystem")
+                .path("api/v2/mottak/fagsystem")
                 .path(kommunenummer)
                 .path(bydelsnummer)
                 .path("krypteringsnokler")
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .header("IntegrasjonId", integrasjonId)
-                .header("IntegrasjonPassord", integrasjonPassord)
-                .header("Authorization", String.format("Bearer %s", maskinporten.getAccessToken("ks:fiks")))
+                .header(INTEGRASJON_ID, integrasjonId)
+                .header(INTEGRASJON_PASSORD, integrasjonPassord)
+                .header(AUTHORIZATION, String.format(BEARER_S, maskinporten.getAccessToken(KS_FIKS)))
                 .get()
                 .readEntity(Krypteringsnokler.class);
     }
@@ -72,15 +77,15 @@ public class BekymringsmeldingApiImpl implements BekymringsmeldingApi {
         MultiPart multipart = new FormDataMultiPart().bodyPart(bekymringsmeldingPdf).bodyPart(asiceZip);
 
         return client.target(baseUrl)
-                .path("/api/v1/mottak/fagsystem")
+                .path("/api/v2/mottak/fagsystem")
                 .path(fiksOrgId.toString())
                 .path(kommunenummer)
                 .path(bydelsnummer)
                 .path("offentlig")
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .header("IntegrasjonId", integrasjonId)
-                .header("IntegrasjonPassord", integrasjonPassord)
-                .header("Authorization", String.format("Bearer %s", maskinporten.getAccessToken("ks:fiks")))
+                .header(INTEGRASJON_ID, integrasjonId)
+                .header(INTEGRASJON_PASSORD, integrasjonPassord)
+                .header(AUTHORIZATION, String.format(BEARER_S, maskinporten.getAccessToken(KS_FIKS)))
                 .post(Entity.entity(multipart, multipart.getMediaType()))
                 .readEntity(BekymringsmeldingId.class).getUuid();
     }
@@ -88,15 +93,15 @@ public class BekymringsmeldingApiImpl implements BekymringsmeldingApi {
     @Override
     public List<Historikk> status(@NonNull UUID bekymringsmeldingId) {
         return client.target(baseUrl)
-                .path("api/v1/mottak/fagsystem")
+                .path("api/v2/mottak/fagsystem")
                 .path(fiksOrgId.toString())
                 .path("bekymringsmelding")
                 .path(bekymringsmeldingId.toString())
                 .path("status")
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .header("IntegrasjonId", integrasjonId)
-                .header("IntegrasjonPassord", integrasjonPassord)
-                .header("Authorization", String.format("Bearer %s", maskinporten.getAccessToken("ks:fiks")))
+                .header(INTEGRASJON_ID, integrasjonId)
+                .header(INTEGRASJON_PASSORD, integrasjonPassord)
+                .header(AUTHORIZATION, String.format(BEARER_S, maskinporten.getAccessToken(KS_FIKS)))
                 .get()
                 .readEntity(new GenericType<List<Historikk>>() {});
     }
