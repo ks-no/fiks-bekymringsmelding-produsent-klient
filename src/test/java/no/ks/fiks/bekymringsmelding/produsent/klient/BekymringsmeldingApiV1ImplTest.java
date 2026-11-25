@@ -3,6 +3,7 @@ package no.ks.fiks.bekymringsmelding.produsent.klient;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
+import no.ks.fiks.bekymringsmelding.produsent.klient.v1.BekymringsmeldingApiV1Impl;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.BekymringsmeldingId;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.Bydel;
 import no.ks.fiks.bekymringsmelding.produsent.klient.model.Historikk;
@@ -17,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -30,17 +30,17 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class BekymringsmeldingApiImplTest {
+class BekymringsmeldingApiV1ImplTest {
     @Mock
     private Maskinportenklient maskinportenklientMock;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Client clientMock;
 
-    private BekymringsmeldingApiImpl api;
+    private BekymringsmeldingApiV1Impl api;
 
     @BeforeEach
     public void setUp() {
-        api = new BekymringsmeldingApiImpl(
+        api = new BekymringsmeldingApiV1Impl(
                 clientMock,
                 String.format("http://%s", UUID.randomUUID()),
                 maskinportenklientMock,
@@ -50,7 +50,7 @@ public class BekymringsmeldingApiImplTest {
     }
 
     @Test
-    public void bydeler(){
+    void bydeler(){
         when(clientMock.target(anyString())
                 .path(any())
                 .path(any())
@@ -70,7 +70,7 @@ public class BekymringsmeldingApiImplTest {
     }
 
     @Test
-    public void krypteringsnokler() {
+    void krypteringsnokler() {
         when(clientMock.target(anyString())
                 .path(any())
                 .path(any())
@@ -89,7 +89,7 @@ public class BekymringsmeldingApiImplTest {
     }
 
     @Test
-    public void status() throws IOException {
+    void status() {
         when(clientMock.target(anyString())
                 .path(any())
                 .path(any())
@@ -111,7 +111,7 @@ public class BekymringsmeldingApiImplTest {
     }
 
     @Test
-    public void sendBekymringsmelding() {
+    void sendBekymringsmelding() {
         when(clientMock.target(anyString())
                 .path(any())
                 .path(any())
