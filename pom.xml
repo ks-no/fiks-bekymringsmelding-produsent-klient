@@ -36,7 +36,7 @@
 
         <jersey.version>4.0.3</jersey.version>
         <maskinporten-client.version>3.6.5</maskinporten-client.version>
-        <jackson-datatype-jsr310.version>2.22.4</jackson-datatype-jsr310.version>
+        <jackson-datatype-jsr310.version>2.23.0</jackson-datatype-jsr310.version>
         <lombok.version>1.18.48</lombok.version>
         <fiks-io-asice-handler.version>2.5.0</fiks-io-asice-handler.version>
         <junit.version>6.1.3</junit.version>
